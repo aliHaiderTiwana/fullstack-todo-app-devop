@@ -32,8 +32,6 @@ jobs:
                const coredemo = require('@actions/core')
                return await coredemo.getIDToken()
            result-encoding: string
-      - name: Build And Deploy
-        id: builddeploy
         - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -45,7 +43,7 @@ jobs:
           output_location: "build"
         #### PASTE AND CONFIG THE SECTION BELOW ####
         env:
-          REACT_APP_API_URL: "https://app-taskapp-backend-aliaider.azurewebsites.net"
+          REACT_APP_API_URL: "app-taskapp-backend-alihaider-e6cmbgejcpaugngx.centralindia-01.azurewebsites.net"
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
