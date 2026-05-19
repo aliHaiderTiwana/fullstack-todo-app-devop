@@ -12,7 +12,7 @@ RUN npm install
 
 # Copy the rest of the frontend files into the container
 COPY . .
-
+RUN chmod -R +x node_modules/.bin
 # Expose port 3000 for the frontend
 EXPOSE 3000
 
