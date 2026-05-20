@@ -21,14 +21,15 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    # STEP 1: LOGIN TO AZURE CONTAINER REGISTRY VIA AZURE SERVICE CONNECTION
-    - task: Docker@2
+    # STEP 1: AUTHENTICATE USING NATIVE AZURE CLI
+    - task: AzureCLI@2
       displayName: 'Step 1: Authenticate with ACR'
       inputs:
-        containerRegistryType: 'Azure Container Registry'
-        azureSubscriptionEndpoint: 'sc-taskapp-student'
-        azureContainerRegistry: 'acrtaskappyaliaider.azurecr.io'
-        command: 'login'
+        azureSubscription: 'sc-taskapp-student'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        # Note: just the registry name here, no .azurecr.io extension
+        inlineScript: 'az acr login --name acrtaskappyaliaider'
 
     # STEP 2 & 3: BUILD AND PUSH IMAGE DIRECTLY USING RAW BASH SCRIPT LAYERS
     - bash: |
