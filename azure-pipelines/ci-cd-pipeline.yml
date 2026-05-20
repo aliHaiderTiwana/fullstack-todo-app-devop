@@ -22,14 +22,26 @@ stages:
       vmImage: 'ubuntu-latest'
     steps:
     - task: Docker@2
-      displayName: 'Build and Push to Registry'
+      displayName: 'Step 1: Compile Local Docker Image'
       inputs:
-        command: 'buildAndPush'
+        command: 'build'
         containerRegistryType: 'Azure Container Registry'
         azureSubscriptionEndpoint: 'sc-taskapp-student'
         azureContainerRegistry: 'acrtaskappyaliaider.azurecr.io'
         repository: 'taskapp-backend'
         dockerfile: '$(Build.SourcesDirectory)/backend/Dockerfile'
+        tags: |
+          $(Build.BuildId)
+          latest
+
+    - task: Docker@2
+      displayName: 'Step 2: Force Push Image Layer to Azure ACR'
+      inputs:
+        command: 'push'
+        containerRegistryType: 'Azure Container Registry'
+        azureSubscriptionEndpoint: 'sc-taskapp-student'
+        azureContainerRegistry: 'acrtaskappyaliaider.azurecr.io'
+        repository: 'taskapp-backend'
         tags: |
           $(Build.BuildId)
           latest
