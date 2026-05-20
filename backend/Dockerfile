@@ -10,14 +10,11 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
-# Copy the rest of the application code
 COPY . .
-RUN chmod -R +x node_modules/.bin
+
 # Run TypeScript build to generate the dist folder
 RUN npm run build  # Make sure this command generates the dist folder
 
 # Expose the backend port
 EXPOSE 5000
-
-# Start the server
 CMD ["node", "dist/server.js"]

@@ -5,7 +5,11 @@ trigger:
       - develop
 
 variables:
+<<<<<<< HEAD
   - group: taskapp-variables # Link your created group fields here
+=======
+  - group: taskapp-variables # Links your variables group fields cleanly
+>>>>>>> origin/main
   - name: imageRepository
     value: 'taskapp-backend'
 
@@ -25,7 +29,12 @@ stages:
       displayName: 'Build and Push to Registry'
       inputs:
         command: 'buildAndPush'
+<<<<<<< HEAD
         containerRegistry: '$(AZURE_SUBSCRIPTION)'
+=======
+        azureSubscriptionEndpoint: '$(AZURE_SUBSCRIPTION)'
+        azureContainerRegistry: '$(DOCKER_REGISTRY)'
+>>>>>>> origin/main
         repository: '$(imageRepository)'
         dockerfile: '$(Build.SourcesDirectory)/backend/Dockerfile'
         tags: |
@@ -45,10 +54,17 @@ stages:
       vmImage: 'ubuntu-latest'
     steps:
     - task: AzureWebAppContainer@1
+<<<<<<< HEAD
       displayName: 'Update Dev App Service Container Container'
       inputs:
         azureSubscription: '$(AZURE_SUBSCRIPTION)'
         appName: 'app-taskapp-backend-AliHaider' # Matches your running app service name
+=======
+      displayName: 'Update Dev App Service Container'
+      inputs:
+        azureSubscription: '$(AZURE_SUBSCRIPTION)'
+        appName: 'app-taskapp-backend-AliHaider'
+>>>>>>> origin/main
         imageName: '$(DOCKER_REGISTRY)/$(imageRepository):$(Build.BuildId)'
 
 # ==========================================
@@ -63,7 +79,11 @@ stages:
     displayName: 'Regulated Release Sequence'
     pool:
       vmImage: 'ubuntu-latest'
+<<<<<<< HEAD
     environment: 'Production' # Triggers your configured Approval Gate check automatically
+=======
+    environment: 'Production' # Triggers your configured Manual Approval Gate check
+>>>>>>> origin/main
     strategy:
       runOnce:
         deploy:
