@@ -13,7 +13,7 @@ stages:
 # ==========================================
 # STAGE 1: BUILD & IMAGE COMPILATION
 # ==========================================
-- stage: Build
+- stage: Docker@2
   displayName: 'Build and Push Backend Container'
   jobs:
   - job: BuildAndPush
@@ -31,7 +31,6 @@ stages:
         tags: |
           $(Build.BuildId)
           latest
-
 # ==========================================
 # STAGE 2: DEVELOPMENT ENVIRONMENT DEPLOYMENT
 # ==========================================
