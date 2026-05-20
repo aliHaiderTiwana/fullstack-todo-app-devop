@@ -1,7 +1,8 @@
 import axios from "axios";
 import config from '../config/config';
 
-const API_URL = config.API_URL;
+// FIXED: Append /tasks to the base API URL
+const API_URL = `${config.API_URL}/tasks`;
 
 // Fetch tasks
 export const fetchTasks = async () => {
