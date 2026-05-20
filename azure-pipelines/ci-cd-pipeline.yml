@@ -25,9 +25,10 @@ stages:
       displayName: 'Build and Push to Registry'
       inputs:
         command: 'buildAndPush'
-        azureSubscriptionEndpoint: '$(AZURE_SUBSCRIPTION)'
-        azureContainerRegistry: '$(DOCKER_REGISTRY)'
-        repository: '$(imageRepository)'
+        containerRegistryType: 'Azure Container Registry'
+        azureSubscriptionEndpoint: 'sc-taskapp-student'
+        azureContainerRegistry: 'acrtaskappyaliaider.azurecr.io'
+        repository: 'taskapp-backend'
         dockerfile: '$(Build.SourcesDirectory)/backend/Dockerfile'
         tags: |
           $(Build.BuildId)
